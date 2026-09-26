@@ -161,8 +161,8 @@ A Python package that unifies game APIs behind one consistent interface — beca
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=F0xyN0xy&show_icons=true&theme=tokyonight&hide_border=true&cache_seconds=1800" width="48%"/>
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=F0xyN0xy&layout=compact&theme=tokyonight&hide_border=true" width="35%"/>
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=F0xyN0xy&theme=tokyonight" width="48%"/>
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=F0xyN0xy&theme=tokyonight" width="35%"/>
 
 <img src="https://streak-stats.demolab.com/?user=F0xyN0xy&theme=tokyonight&hide_border=true" width="48%"/>
 
