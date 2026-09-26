@@ -1,0 +1,35 @@
+name: Update Total Downloads Badge
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sum release downloads across all repos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: F0xyN0xy
+        run: |
+          total=0
+          for repo in $(gh repo list "$USERNAME" --limit 100 --json name -q '.[].name'); do
+            count=$(gh api "repos/$USERNAME/$repo/releases" --jq '[.[] | .assets[] | .download_count] | add // 0')
+            total=$((total + count))
+          done
+          echo "{\"schemaVersion\": 1, \"label\": \"Total Downloads\", \"message\": \"$total\", \"color\": \"6a11cb\"}" > downloads-badge.json
+          echo "Total downloads: $total"
+      - name: Commit badge
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add downloads-badge.json
+          git diff --cached --quiet || git commit -m "chore: update total downloads badge"
+          git push
